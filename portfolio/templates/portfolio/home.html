@@ -1,0 +1,31 @@
+{% extends 'portfolio/base.html' %} 
+{% block content %}
+<h1>This is the homepage</h1>
+
+{% load static %}
+
+<a href="{% url 'blog:all_blogs' %}">Take me to Blog</a>
+<br />
+
+<a href="{% static 'portfolio/resume.pdf' %}">Resume</a>
+
+<img
+  src="{% static 'portfolio/ham-and-cheese-sandwich.jpg' %}"
+  alt="Ham And Cheese Sandwich"
+  width="100px"
+/>
+
+{% for project in projects %}
+<p>{{ project.title }}</p>
+<p>{{ project.description }}</p>
+
+{% if project.url %}
+<a href="{{ project.url }}"
+  ><img src="{{project.image.url}}" alt="useless image" width="500px"
+/></a>
+
+{% else %}
+<img src="{{project.image.url}}" alt="useless image" width="500px" />
+{% endif %} 
+{% endfor %} 
+{% endblock %}
